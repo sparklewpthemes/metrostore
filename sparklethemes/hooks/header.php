@@ -65,9 +65,9 @@ if ( ! function_exists( 'metrostore_top_header' ) ) {
         					
         					if(!empty( $email_address )) { ?>        							
         	                    <li>
-        	                    	<a href="mailto:<?php echo antispambot( $email_address ); ?>">
+        	                    	<a href="mailto:<?php echo esc_attr( antispambot( $email_address ) ); ?>">
         	                    		<i class="fa fa-envelope"></i>
-        	                    		<?php echo antispambot( $email_address ); ?>
+        	                    		<?php echo esc_attr( antispambot( $email_address ) ); ?>
         	                    	</a>
         	                    </li>
                             <?php }  ?>

@@ -78,8 +78,8 @@ function metrostore_widgets_show_widget_field($instance = '', $widget_field = ''
 
         case 'group_start' :
             ?>
-            <div class="metrostore-main-group" id="ap-font-awesome-list <?php echo $instance->get_field_id(($metrostore_widgets_name)); ?>">
-                <div class="metrostore-main-group-heading" style="font-size: 15px;  font-weight: bold;  padding-top: 12px;"><?php echo @$metrostore_widgets_title ; ?><span class="toogle-arrow"></span></div>
+            <div class="metrostore-main-group" id="ap-font-awesome-list <?php echo $instance->get_field_id( $metrostore_widgets_name ); ?>">
+                <div class="metrostore-main-group-heading" style="font-size: 15px;  font-weight: bold;  padding-top: 12px;"><?php echo $metrostore_widgets_title ; ?><span class="toogle-arrow"></span></div>
                 <div class="metrostore-main-group-wrap">
             <?php
             break;

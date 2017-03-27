@@ -146,7 +146,7 @@ $wp_customize->add_panel('metorstore_header_settings', array(
 
 		$wp_customize->add_control('metrostore_first_icon_block_area',array(
 			'type' => 'text',
-			'description' => sprintf( __( 'Use font awesome icon: Eg: %s. %sSee more here%s', 'metrostore' ), 'free-shipping','<a href="'.esc_url('http://fontawesome.io/cheatsheet/').'" target="_blank">','</a>' ),        
+			'description' => sprintf( __( 'Use font awesome icon: Eg: %1$s. %2$sSee more here%3$s', 'metrostore' ), 'free-shipping','<a href="'.esc_url('http://fontawesome.io/cheatsheet/').'" target="_blank">','</a>' ),        
 			'label' => esc_html__('First Services Icon', 'metrostore'),
 			'section' => 'metrostore_header_service_area',
 			'setting' => 'metrostore_first_icon_block_area',
@@ -184,7 +184,7 @@ $wp_customize->add_panel('metorstore_header_settings', array(
 
 		$wp_customize->add_control('metrostore_second_icon_block_area',array(
 			'type' => 'text',
-			'description' => sprintf( __( 'Use font awesome icon: Eg: %s. %sSee more here%s', 'metrostore' ), 'fa-user','<a href="'.esc_url('http://fontawesome.io/cheatsheet/').'" target="_blank">','</a>' ),        
+			'description' => sprintf( __( 'Use font awesome icon: Eg: %1$s. %2$sSee more here%3$s', 'metrostore' ), 'fa-user','<a href="'.esc_url('http://fontawesome.io/cheatsheet/').'" target="_blank">','</a>' ),        
 			'label' => esc_html__('Second Services Icon', 'metrostore'),
 			'section' => 'metrostore_header_service_area',
 			'setting' => 'metrostore_second_icon_block_area',

@@ -75,6 +75,10 @@ Metrostore includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
+= 1.0.5 13th March 2017 =
+
+** Fixed all the issue which issue list by review.
+
 = 1.0.4 12th March 2017 =
 
 ** Fixed all the issue which issue list by review.

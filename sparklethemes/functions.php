@@ -327,8 +327,7 @@ add_filter('excerpt_more', 'metrostore_excerpt_more');
  * MetroStore Comment Callback function
 */
 if ( ! function_exists( 'metrostore_comment' ) ) {
-  function metrostore_comment($comment, $args, $depth) {
-    $GLOBALS['comment'] = $comment; ?>
+  function metrostore_comment($comment, $args, $depth) { ?>
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
         <div class="comment-wrapper media" id="comment-<?php comment_ID(); ?>">
             <a href="javascript();" class="pull-left">
