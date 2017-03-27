@@ -14,8 +14,7 @@ License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 == Description ==
-
-MetroStore is a clean, beautiful and fully customizable responsive WooCommerce WordPress theme. This theme is packed with lots of exciting feature that enhances the ecommerce experience.
+Metrostore is a clean, beautiful and fully customizable responsive & free eCommerce / WooCommerce WordPress theme. This theme packs many premium features and several custom widgets which helps making your eCommerce online store professional and well organized. The theme is fully translation ready and compatible with all major plugins.
 
 == Translation ==
 
@@ -36,9 +35,7 @@ The exceptions to license are as follows:
 
 * Google Fonts - Apache License, version 2.0
 
-* Font-Awesome https://github.com/FortAwesome/Font-Awesome [MIT](http://opensource.org/licenses/MIT)- by @davegandy
-
-* The Font Awesome font is licensed under the SIL OFL 1.1: http://scripts.sil.org/OFL
+* FontAwesome 4.5.0, Copyright 2012 Dave Gandy Font License: SIL OFL 1.1, Code License: MIT License http://fontawesome.io/license/
 
 * FlexSlider https://github.com/woothemes/FlexSlider [GPLv2](https://www.gnu.org/licenses/gpl-2.0.html) - Copyright 2012 WooThemes Tyler Smith (@mbmufffin)
 
@@ -56,7 +53,11 @@ The exceptions to license are as follows:
 
 
 Image used in screenshot
-https://pixabay.com/en/woman-beach-female-jeans-blue-1031306/  License CC0 Public Domain
+https://pixabay.com/en/girl-woman-blonde-long-hair-691712/           License CC0 Public Domain
+https://pixabay.com/en/clock-time-time-indicating-474128/            License CC0 Public Domain
+https://pixabay.com/en/male-watch-wrist-watch-packshot-188780/       License CC0 Public Domain
+https://www.pexels.com/photo/wristwatch-watch-hand-adriatica-23969/  License CC0 Public Domain
+https://pixabay.com/en/smart-watch-apple-technology-style-821558/    License CC0 Public Domain
 
 
 == Installation ==
@@ -73,6 +74,10 @@ https://pixabay.com/en/woman-beach-female-jeans-blue-1031306/  License CC0 Publi
 Metrostore includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
+
+= 1.0.4 12th March 2017 =
+
+** Fixed all the issue which issue list by review.
 
 = 1.0.3 01th Jan 2017 =
 

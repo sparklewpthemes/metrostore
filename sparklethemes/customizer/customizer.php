@@ -15,18 +15,41 @@ function metrostore_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
+
+/**
+ * General Settings Panel
+*/
+$wp_customize->add_panel('metrostore_general_settings', array(
+   'capabitity' => 'edit_theme_options',
+   'priority' => 1,
+   'title' => esc_html__('General Settings', 'metrostore')
+));
+
+    $wp_customize->get_section('title_tagline')->panel = 'metrostore_general_settings';
+    $wp_customize->get_section('title_tagline' )->priority = 1;
+
+    $wp_customize->get_section('header_image')->panel = 'metrostore_general_settings';
+    $wp_customize->get_section('header_image' )->priority = 2;
+
+    $wp_customize->get_section('colors')->title = esc_html__( 'Themes Colors', 'metrostore' );
+    $wp_customize->get_section('colors')->panel = 'metrostore_general_settings';
+    $wp_customize->get_section('header_image' )->priority = 3;
+
+    $wp_customize->get_section('background_image')->panel = 'metrostore_general_settings';
+    $wp_customize->get_section('header_image' )->priority = 4;
+	
 	/**
 	  * Web Page Layout Section
 	*/
 	$wp_customize->add_section( 'metrostore_web_page_layout', array(
 		'title'   => esc_html__('WebLayout Options', 'metrostore'),
-		'priority' => 21,
+		'priority' => 5,
+		'panel'   => 'metrostore_general_settings'
 	));
 
 		$wp_customize->add_setting('metrostore_webpage_layout_options', array(
 		  'default' => 'fullwidth',
 		  'sanitize_callback' => 'metrostore_weblayout_sanitize',
-		  //'transport' => 'postMessage'
 		));
 
 		$wp_customize->add_control('metrostore_webpage_layout_options', array(
@@ -39,6 +62,7 @@ function metrostore_customize_register( $wp_customize ) {
 			    'fullwidth' => esc_html__('Full Width Layout', 'metrostore')
 			  )
 		));
+
 
 /**
  * Header Settings Area 
@@ -195,28 +219,47 @@ $wp_customize->add_panel('metorstore_header_settings', array(
  * Theme Color Settings Area 
 */
 	$wp_customize->get_section( 'colors' )->title    = esc_html__( 'Theme Colors Settings', 'metrostore' );
-	
 	$wp_customize->get_section('colors' )->priority = 22;
 
-	$wp_customize->add_setting('metrostore_primary_color', array(
-     'default' => '#ff3366',
-     'capability' => 'edit_theme_options',
-     'sanitize_callback' => 'sanitize_hex_color',        
-    ));
+/**
+ * Breadcrumbs Settings Area 
+*/
+$wp_customize->add_section('metrostore_breadcrumbs_section', array(
+  'title' => esc_html__('Breadcrumbs Settings', 'metrostore'),
+  'priority' => 23,
+));
 
-    $wp_customize->add_control('metrostore_primary_color', array(
-     'type'     => 'color',
-     'label'    => esc_html__('Primary Colors', 'metrostore'),
-     'section'  => 'colors',
-     'setting'  => 'metrostore_primary_color',
-    ));
+	$wp_customize->add_setting('metrostore_breadcrumb_options', array(
+		'default' => 1,
+		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'metrostore_checkbox_sanitize' // done
+	));
+
+	$wp_customize->add_control('metrostore_breadcrumb_options', array(
+		'type' => 'checkbox',
+		'label' => esc_html__('Check to Enable the Breadcrumbs', 'metrostore'),
+		'section' => 'metrostore_breadcrumbs_section',
+		'settings' => 'metrostore_breadcrumb_options'
+	));	
+
+	$wp_customize->add_setting('metrostore_breadcrumbs_bg_image', array(
+		'default' => '',
+		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'esc_url_raw',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'metrostore_breadcrumbs_bg_image', array(
+		 'label' => esc_html__('Upload Breadcrumbs Background Image', 'metrostore'),
+		 'section' => 'metrostore_breadcrumbs_section',
+		 'setting' => 'metrostore_breadcrumbs_bg_image'
+	)));	
 
 /**
  * Banner/Slider Settings Panel
 */
 $wp_customize->add_section('metrostore_main_banner_area', array(
   'title' => esc_html__('Home Slider Settings', 'metrostore'),
-  'priority' => 23,
+  'priority' => 24,
 ));
 	
 	$wp_customize->add_setting('metrostore_home_slider_options', array(
@@ -252,7 +295,7 @@ $wp_customize->add_section('metrostore_main_banner_area', array(
 	$wp_customize->add_panel('metorstore_settings', array(
 	  'title' => esc_html__('Footer Settings Area', 'metrostore'),
 	  'capability' => 'edit_theme_options',
-	  'priority' => 24,
+	  'priority' => 25,
 	));
 
 	/**
@@ -283,7 +326,7 @@ $wp_customize->add_section('metrostore_main_banner_area', array(
 	*/
     $wp_customize->add_section('metrostore_social_link_activate_settings', array(
 		'priority' => 2,
-		'title'    => esc_html__('Social Icon Options', 'metrostore'),
+		'title'    => esc_html__('Social Icon Settings', 'metrostore'),
 		'panel'    => 'metorstore_settings'
 	));		
 
@@ -388,6 +431,17 @@ $wp_customize->add_section('metrostore_main_banner_area', array(
         } else {
           return '';
         }
+    }
+
+    /**
+	 * Checkbox Sanitization
+	*/
+    function metrostore_checkbox_sanitize($input) {
+      if ( $input == 1 ) {
+         return 1;
+      } else {
+         return 0;
+      }
     }
     	
 }

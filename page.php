@@ -31,11 +31,11 @@ get_header();
 <div class="main-container col1-layout">
 	<div class="container">
 		<div class="row">
-
-			<?php  if ($metrostore_page_layout == 'leftsidebar') : ?>
-					<?php get_sidebar('left'); ?>
-			<?php endif; ?>
-
+			<?php  
+				if ($metrostore_page_layout == 'leftsidebar'){ 
+					get_sidebar('left'); 
+				} 
+			?>
 			<div id="primary" class="content-area col-xs-12 col-sm-<?php echo intval( $metrostore_col ); ?>">
 				<main id="main" class="site-main" role="main">
 
@@ -54,13 +54,13 @@ get_header();
 
 				</main><!-- #main -->
 			</div><!-- #primary -->
-
-			<?php  if ($metrostore_page_layout == 'rightsidebar') : ?>
-					<?php get_sidebar(); ?>
-			<?php endif; ?>
+			<?php  
+				if ($metrostore_page_layout == 'rightsidebar') {
+					get_sidebar(); 
+				}
+			?>
 			
 		</div>
 	</div>
 </div>
-
 <?php get_footer();

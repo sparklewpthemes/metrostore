@@ -70,51 +70,50 @@ class metrostore_quick_contact_info_widget_area extends WP_Widget {
 
   public function widget($args, $instance) {
       extract($args);
-      extract($instance);
-      
+      extract($instance);      
       /**
        * wp query for first block
       */  
-      $title      = $instance['metrostore_quick_contact_info_title']; 
-      $short_desc = $instance['metrostore_quick_contact_info_short_desc'];
-      $address_info  = $instance['metrostore_quick_contact_info_address'];
-      $email_address = $instance['metrostore_quick_contact_info_email'];
-      $phone_number  = $instance['metrostore_quick_contact_info_phone'];
+      $title         = empty( $instance['metrostore_quick_contact_info_title'] ) ? '' : $instance['metrostore_quick_contact_info_title']; 
+      $short_desc    = empty( $instance['metrostore_quick_contact_info_short_desc'] ) ? '' : $instance['metrostore_quick_contact_info_short_desc'];
+      $address_info  = empty( $instance['metrostore_quick_contact_info_address'] ) ? '' : $instance['metrostore_quick_contact_info_address'];
+      $email_address = empty( $instance['metrostore_quick_contact_info_email'] ) ? '' : $instance['metrostore_quick_contact_info_email'];
+      $phone_number  = empty( $instance['metrostore_quick_contact_info_phone'] ) ? '' : $instance['metrostore_quick_contact_info_phone'];
           
       echo $before_widget; 
-  ?>
-  
+  ?>  
 <section id="contact" class="gray">    
-    <div class="container"> 
-
+    <div class="container">
       <div class="page-header-wrapper">
         <div class="container">
             <div class="page-header text-center">
               <?php if(!empty( $title )) { ?>
                   <h2><?php echo esc_html($title); ?></h2>
-              <?php } do_action( 'metrostore_title_design' );
+              <?php } ?>
+              <?php
+                do_action( 'metrostore_title_design' );
                   if(!empty( $short_desc )) {
               ?>
                 <p class="lead text-gray"><?php echo esc_html($short_desc); ?></p>
               <?php } ?>
             </div>
         </div>
-      </div> <!-- End page header-->
-      
+      </div> <!-- End page header-->      
       <div class="row">
         <div class="col-sm-4 adress-element"> <i class="fa fa-home fa-2x"></i>
           <h3><?php esc_html_e('Our Address','metrostore'); ?></h3>
-          <span class="font-l"><a href="https://www.google.com.np/maps/search/<?php echo esc_attr($address_info); ?>" target="_blank"><?php echo esc_attr($address_info); ?></a></span> </div>
+          <span class="font-l"><?php echo esc_attr($address_info); ?></span> 
+        </div>
         <div class="col-sm-4 adress-element"> <i class="fa fa-comment fa-2x"></i>
           <h3><?php esc_html_e('Our mail','metrostore'); ?></h3>
-          <span class="font-l"><a href="mailto:<?php echo sanitize_email($email_address); ?>"><?php echo sanitize_email($email_address); ?></a></span> </div>
+          <span class="font-l"><a href="mailto:<?php echo antispambot($email_address); ?>"><?php echo antispambot($email_address); ?></a></span> 
+        </div>
         <div class="col-sm-4 adress-element"> <i class="fa fa-phone fa-2x"></i>
           <h3><?php esc_html_e('Our phone','metrostore'); ?></h3>
-          <span class="font-l"><?php echo esc_attr($phone_number); ?></span> </div>
+          <span class="font-l"><?php echo esc_attr($phone_number); ?></span> 
+        </div>
       </div>
-
-    </div>
-   
+    </div>   
 </section>   
 
   <?php         

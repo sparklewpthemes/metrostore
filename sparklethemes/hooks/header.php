@@ -57,17 +57,17 @@ if ( ! function_exists( 'metrostore_top_header' ) ) {
 				    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
         				<ul class="quickinfo">
         					<?php
-        						$email_address    = sanitize_email( get_theme_mod('metrostore_email_title') );
-        						$phone_number     = esc_attr( get_theme_mod('metrostore_phone_number') );
+        						$email_address    = get_theme_mod('metrostore_email_title');
+        						$phone_number     = get_theme_mod('metrostore_phone_number');
         						$phonenumber      = preg_replace("/[^0-9]/","",$phone_number);
-        						$map_address      = esc_html( get_theme_mod('metrostore_map_address') );
-        						$shop_open_time   = esc_attr( get_theme_mod('metrostore_start_open_time') );
+        						$map_address      = get_theme_mod('metrostore_map_address');
+        						$shop_open_time   = get_theme_mod('metrostore_start_open_time');
         					
         					if(!empty( $email_address )) { ?>        							
         	                    <li>
-        	                    	<a href="mailto:<?php echo sanitize_email( $email_address ); ?>">
+        	                    	<a href="mailto:<?php echo antispambot( $email_address ); ?>">
         	                    		<i class="fa fa-envelope"></i>
-        	                    		<?php echo sanitize_email( $email_address ); ?>
+        	                    		<?php echo antispambot( $email_address ); ?>
         	                    	</a>
         	                    </li>
                             <?php }  ?>
@@ -82,11 +82,9 @@ if ( ! function_exists( 'metrostore_top_header' ) ) {
                             <?php }  ?>
                             
                             <?php if(!empty( $map_address )) { ?>        							
-        	                    <li>
-        	                    	<a target="_blank" href="https://www.google.com.np/maps/place/<?php echo esc_attr( $map_address ); ?>">
-        	                    		<i class="fa fa-map"></i>
-        	                    		<?php echo esc_attr( $map_address ); ?>
-        	                    	</a>
+        	                    <li>        	                    	
+    	                    		<i class="fa fa-map"></i>
+    	                    		<?php echo esc_attr( $map_address ); ?>
         	                    </li>
                             <?php }  ?>
                             

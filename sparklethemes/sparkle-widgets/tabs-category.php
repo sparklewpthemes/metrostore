@@ -72,21 +72,18 @@ class metrostore_tabs_category_widget_area extends WP_Widget {
       /**
        * wp query for first block
       */  
-      $product_number = $instance['metrostore_cat_product_category_number'];
-      $tabs_category  = $instance['metrostore_woo_tabs_category'];
+      $product_number = empty( $instance['metrostore_cat_product_category_number'] ) ? '' : $instance['metrostore_cat_product_category_number'];
+      $tabs_category  = empty( $instance['metrostore_woo_tabs_category'] ) ? '' : $instance['metrostore_woo_tabs_category'];
       if(!empty( $tabs_category )) {
           $tabs_cat_id =  key( $tabs_category );
       }
       echo $before_widget; 
   ?>
 
-<!-- main container -->
 <div class="main-container col1-layout">
     <div class="container">
-      <div class="row"> 
-        <!-- Home Tabs  -->
-        <div class="home-tab col-xs-12 wow fadeInUp">
-          
+      <div class="row">
+        <div class="home-tab col-xs-12 wow fadeInUp">          
           <ul class="nav home-nav-tabs home-product-tabs metrotabs" data-id="<?php echo intval( $product_number ); ?>">
             <?php
                 if(!empty($tabs_category)){
@@ -100,17 +97,13 @@ class metrostore_tabs_category_widget_area extends WP_Widget {
                 }
             ?>
           </ul>
-
-          <div id="productTabContent" class="tab-content">
-            
-            <div class="metor-tabs">            
-              
+          <div id="productTabContent" class="tab-content">            
+            <div class="metor-tabs">
               <div class="tab-pane active in" id="<?php echo esc_attr( $term->slug ); ?>">
                 <div class="new-arrivals-pro">
                   <div class="slider-items-products">
                     <div id="tabs-slider" class="product-flexslider hidden-buttons">
-                      <div class="slider-items slider-width-col4">
-                        
+                      <div class="slider-items slider-width-col4">                        
                         <?php 
                             $product_args = array(
                                 'post_type' => 'product',
@@ -134,16 +127,12 @@ class metrostore_tabs_category_widget_area extends WP_Widget {
                   </div>
                 </div>
               </div>
-
-            </div>
-            
+            </div>            
           </div>
         </div>
       </div>
     </div>
-</div>
-<!-- end main container --> 
-
+</div><!-- end main container --> 
   <?php         
       echo $after_widget;
   }

@@ -230,7 +230,7 @@ if ( ! function_exists( 'metrostore_tabs_ajax_action' ) ) {
                       ?>
                           <?php woocommerce_get_template_part( 'content', 'product' ); ?>
                           
-                      <?php } } wp_reset_query(); ?>
+                      <?php } } wp_reset_postdata(); ?>
                     </div>
                   </div>
                 </div>

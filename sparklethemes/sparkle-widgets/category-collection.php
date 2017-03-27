@@ -11,7 +11,7 @@ class metrostore_category_collection_widget_area extends WP_Widget {
 
   /**
    * Register widget with WordPress.
-  **/
+  */
   public function __construct() {
       parent::__construct(
           'metrostore_category_collection_widget_area', esc_html__('MS: Woo Category Collection','metrostore'), array(
@@ -74,14 +74,13 @@ class metrostore_category_collection_widget_area extends WP_Widget {
 
   public function widget($args, $instance) {
       extract($args);
-      extract($instance);
-      
+      extract($instance);      
       /**
        * wp query for first block
       */  
-      $title                  = $instance['metrostore_cat_collection_title']; 
-      $short_desc             = $instance['metrostore_cat_collection_short_desc'];
-      $category_collection_id = $instance['metrostore_woo_category_collection'];
+      $title                  = empty( $instance['metrostore_cat_collection_title'] ) ? '' : $instance['metrostore_cat_collection_title']; 
+      $short_desc             = empty( $instance['metrostore_cat_collection_short_desc'] ) ? '' : $instance['metrostore_cat_collection_short_desc'];
+      $category_collection_id = empty( $instance['metrostore_woo_category_collection'] ) ? '' : $instance['metrostore_woo_category_collection'];
 
       echo $before_widget; 
   ?>
@@ -90,8 +89,9 @@ class metrostore_category_collection_widget_area extends WP_Widget {
     <div class="container">
       <div class="page-header text-center">
         <?php if(!empty( $title )) { ?>
-            <h2><?php echo esc_html($title); ?></h2>
-        <?php } do_action( 'metrostore_title_design' );
+            <h2><?php echo esc_html( $title ); ?></h2>
+        <?php } ?>
+        <?php do_action( 'metrostore_title_design' );
             if(!empty( $short_desc )) {
         ?>
           <p class="lead text-gray"><?php echo esc_html($short_desc); ?></p>
@@ -128,8 +128,8 @@ class metrostore_category_collection_widget_area extends WP_Widget {
                   ?>
                 </a>
                 <div class="collections-link">
-                  <a href="<?php echo esc_url($term_link); ?>">
-                      <?php echo esc_attr($term_name); ?>
+                  <a href="<?php echo esc_url( $term_link ); ?>">
+                      <?php echo esc_attr( $term_name ); ?>
                   </a>
                 </div>
               </div>

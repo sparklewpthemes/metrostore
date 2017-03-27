@@ -64,11 +64,11 @@ class metrostore_blogs_widget_area extends WP_Widget {
       extract($instance);
       
       /**
-      ** wp query for first block
-      **/  
-      $title               = $instance['metrostore_blog_title'];
-      $blogs_category_list = $instance['metrostore_default_posts_category'];
-      $posts_number        = intval( $instance['metrostore_posts_number'] );      
+       * wp query for first block
+      */  
+      $title               = empty( $instance['metrostore_blog_title'] ) ? '' : $instance['metrostore_blog_title'];
+      $blogs_category_list = empty( $instance['metrostore_default_posts_category'] ) ? '' : $instance['metrostore_default_posts_category'];
+      $posts_number        = empty( $instance['metrostore_posts_number'] ) ? 5 : $instance['metrostore_posts_number'];      
       
       $blogs_cat_id = array();
       if(!empty($blogs_category_list)){
@@ -89,7 +89,6 @@ class metrostore_blogs_widget_area extends WP_Widget {
       <div class="row">
         <div class="slider-items-products">
           <div id="latest-news-slider" class="product-flexslider hidden-buttons"> 
-            <!-- Begin page header-->
             <div class="page-header-wrapper">
               <div class="container">
                 <div class="page-header text-center">
@@ -99,7 +98,6 @@ class metrostore_blogs_widget_area extends WP_Widget {
                 </div>
               </div>
             </div><!-- End page header-->
-
             <div class="slider-items slider-width-col6">
               <?php 
                   if( $blogs_posts->have_posts() ) : while( $blogs_posts->have_posts() ) : $blogs_posts->the_post();
@@ -116,7 +114,6 @@ class metrostore_blogs_widget_area extends WP_Widget {
                           </a>
                       </div>
                     <?php } ?>
-
                     <div class="content-meta">
                       <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                       <ul class="post-info">
@@ -127,8 +124,7 @@ class metrostore_blogs_widget_area extends WP_Widget {
                       <a class="readMore" href="<?php the_permalink(); ?>"><?php esc_html_e('Read More','metrostore'); ?> <i class="fa fa-angle-right"></i></a> </div>
                   </div>
                 </div><!-- End Item -->
-              <?php endwhile; endif; wp_reset_postdata(); ?>               
-              
+              <?php endwhile; endif; wp_reset_postdata(); ?> 
             </div>
           </div>
         </div>

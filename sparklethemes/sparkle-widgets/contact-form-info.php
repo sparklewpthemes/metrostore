@@ -58,12 +58,12 @@ class metrostore_contact_info_form_widget_area extends WP_Widget {
       extract($instance);
       
       /**
-      ** wp query for first block
-      **/  
-      $title          = $instance['metrostore_contact_form_title']; 
-      $short_desc     = $instance['metrostore_contact_form_short_desc'];
-      $form_shortcode = $instance['metrostore_contact_form_shortcode'];
-      $bg_image       = esc_url( $instance['metrostore_contact_form_bg_image'] );      
+       * wp query for first block
+      */  
+      $title          = empty( $instance['metrostore_contact_form_title'] ) ? '' : $instance['metrostore_contact_form_title']; 
+      $short_desc     = empty( $instance['metrostore_contact_form_short_desc'] ) ? '' : $instance['metrostore_contact_form_short_desc'];
+      $form_shortcode = empty( $instance['metrostore_contact_form_shortcode'] ) ? '' : $instance['metrostore_contact_form_shortcode'];
+      $bg_image       = empty( $instance['metrostore_contact_form_bg_image'] ) ? '' : $instance['metrostore_contact_form_bg_image'];      
       
       echo $before_widget; 
   ?>
@@ -73,14 +73,13 @@ class metrostore_contact_info_form_widget_area extends WP_Widget {
     <div class="contact-form" <?php if(!empty( $bg_image )) { ?>style="background-image:url(<?php echo esc_url($bg_image); ?>); background-size: cover;" <?php } ?>>
       <div class="masked">
         <div class="container"> 
-          
-          <!-- Begin page header-->
           <div class="page-header-wrapper">
             <div class="container">
               <div class="page-header text-center">
                 <?php if(!empty( $title )) { ?>
                     <h2><?php echo esc_html($title); ?></h2>
-                <?php }
+                <?php } ?>
+                <?php
                     do_action( 'metrostore_title_design' );
                     if(!empty( $short_desc )) {
                 ?>
@@ -91,30 +90,7 @@ class metrostore_contact_info_form_widget_area extends WP_Widget {
                 <?php echo do_shortcode( $form_shortcode ); ?>
               </div>
             </div>
-          </div>
-          <!-- End page header-->
-          
-         <!--  <form class="form-horizontal">
-            <div class="form-group wow zoomIn">
-              <div class="col-sm-4">
-                <input type="text" name="Name" class="form-control label_better" placeholder="Sign up your email...">
-              </div>
-              <div class="col-sm-4">
-                <input type="text" name="Email" class="form-control label_better" placeholder="Email">
-              </div>
-              <div class="col-sm-4">
-                <input type="text" name="Phone" class="form-control label_better" placeholder="Phone">
-              </div>
-            </div>
-            <div class="form-group wow zoomIn">
-              <div class="col-sm-12">
-                <textarea class="form-control label_better" placeholder="Your comment.." rows="7"></textarea>
-              </div>
-            </div>
-            <div class="form-group commands wow zoomIn">
-              <button class="send-btn">Send message</button>
-            </div>
-          </form> -->
+          </div><!-- End page header-->
         </div>
       </div>
     </div>

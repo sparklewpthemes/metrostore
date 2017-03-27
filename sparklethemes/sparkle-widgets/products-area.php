@@ -19,8 +19,7 @@ class metrostore_product_widget_area extends WP_Widget {
       ));
   }
   
-  private function widget_fields() {
-      
+  private function widget_fields() {      
 
       $prod_type = array(
       	  'latest_product'  => esc_html__('Latest Product', 'metrostore'),
@@ -92,16 +91,15 @@ class metrostore_product_widget_area extends WP_Widget {
 
   public function widget($args, $instance) {
       extract($args);
-      extract($instance);
-      
+      extract($instance);      
       /**
-      ** wp query for first block
-      **/  
-      $title            = $instance['metrostore_product_title']; 
-      $short_desc       = $instance['metrostore_product_short_desc'];
-      $product_type     = $instance['metrostore_product_type'];
-      $product_category = $instance['metrostore_woo_category'];
-      $product_number   = $instance['metrostore_product_number'];
+       * wp query for first block
+      */  
+      $title            = empty( $instance['metrostore_product_title'] ) ? '' : $instance['metrostore_product_title']; 
+      $short_desc       = empty( $instance['metrostore_product_short_desc'] ) ? '' : $instance['metrostore_product_short_desc'];
+      $product_type     = empty( $instance['metrostore_product_type'] ) ? '' : $instance['metrostore_product_type'];
+      $product_category = empty( $instance['metrostore_woo_category'] ) ? '' : $instance['metrostore_woo_category'];
+      $product_number   = empty( $instance['metrostore_product_number'] ) ? '' : $instance['metrostore_product_number'];
 
       $product_args       =   '';
       global $metrostore_label;
@@ -184,10 +182,12 @@ class metrostore_product_widget_area extends WP_Widget {
     <div class="page-header text-center">
       <?php if(!empty( $title )) { ?>
           <h2><?php echo esc_html($title); ?></h2>
-      <?php } do_action( 'metrostore_title_design' );
+      <?php } ?>
+      <?php
+       do_action( 'metrostore_title_design' );
           if(!empty( $short_desc )) {
       ?>
-        <p class="lead text-gray"><?php echo esc_html($short_desc); ?></p>
+        <p class="lead text-gray"><?php echo esc_html( $short_desc ); ?></p>
       <?php } ?>
     </div>
     
@@ -203,7 +203,7 @@ class metrostore_product_widget_area extends WP_Widget {
                       <?php
                           $metrostore_label = esc_html__('New', 'metrostore');
                           $query = new WP_Query($product_args);
-                          if($query->have_posts()) { while($query->have_posts()) { $query->the_post();
+                          if( $query->have_posts() ) { while( $query->have_posts() ) { $query->the_post();
                       ?>
                           <?php woocommerce_get_template_part( 'content', 'product' ); ?>
                           

@@ -111,21 +111,20 @@ class metrostore_about_section_widget_area extends WP_Widget {
 
   public function widget($args, $instance) {
       extract($args);
-      extract($instance);
-      
+      extract($instance);      
       /**
        * wp query for first block
       */  
-      $title               = $instance['metrostore_about_section_title']; 
-      $short_desc          = $instance['metrostore_about_section_short_desc'];
-      $service_one_icon    = $instance['metrostore_services_area_one_icon'];
-      $service_one         = $instance['metrostore_services_area_one'];    
-      $service_two_icon    = $instance['metrostore_services_area_two_icon'];
-      $service_two         = $instance['metrostore_services_area_two'];
-      $service_three_icon  = $instance['metrostore_services_area_three_icon'];
-      $service_three       = $instance['metrostore_services_area_three'];
-      $service_four_icon   = $instance['metrostore_services_area_four_icon'];
-      $service_four        = $instance['metrostore_services_area_four'];
+      $title               = empty( $instance['metrostore_about_section_title'] ) ? '' : $instance['metrostore_about_section_title']; 
+      $short_desc          = empty( $instance['metrostore_about_section_short_desc'] ) ? '' : $instance['metrostore_about_section_short_desc']; 
+      $service_one_icon    = empty( $instance['metrostore_services_area_one_icon'] ) ? '' : $instance['metrostore_services_area_one_icon']; 
+      $service_one         = empty( $instance['metrostore_services_area_one'] ) ? '' : $instance['metrostore_services_area_one'];     
+      $service_two_icon    = empty( $instance['metrostore_services_area_two_icon'] ) ? '' : $instance['metrostore_services_area_two_icon']; 
+      $service_two         = empty( $instance['metrostore_services_area_two'] ) ? '' : $instance['metrostore_services_area_two']; 
+      $service_three_icon  = empty( $instance['metrostore_services_area_three_icon'] ) ? '' : $instance['metrostore_services_area_three_icon']; 
+      $service_three       = empty( $instance['metrostore_services_area_three'] ) ? '' : $instance['metrostore_services_area_three']; 
+      $service_four_icon   = empty( $instance['metrostore_services_area_four_icon'] ) ? '' : $instance['metrostore_services_area_four_icon']; 
+      $service_four        = empty( $instance['metrostore_services_area_four'] ) ? '' : $instance['metrostore_services_area_four']; 
       
       echo $before_widget; 
   ?>

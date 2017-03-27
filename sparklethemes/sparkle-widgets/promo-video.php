@@ -47,14 +47,13 @@ class metrostore_promo_video_widget_area extends WP_Widget {
 
   public function widget($args, $instance) {
       extract($args);
-      extract($instance);
-      
+      extract($instance);      
       /**
-      ** wp query for first block
-      **/  
-      $title      = $instance['metrostore_promo_video_title']; 
-      $short_desc = $instance['metrostore_promo_video_short_desc'];
-      $video_url  = $instance['metrostore_promo_video_url'];
+       * wp query for first block
+      */  
+      $title      = empty( $instance['metrostore_promo_video_title'] ) ? '' : $instance['metrostore_promo_video_title']; 
+      $short_desc = empty( $instance['metrostore_promo_video_short_desc'] ) ? '' : $instance['metrostore_promo_video_short_desc'];
+      $video_url  = empty( $instance['metrostore_promo_video_url'] ) ? '' : $instance['metrostore_promo_video_url'];
 
       echo $before_widget; 
   ?>
@@ -65,7 +64,9 @@ class metrostore_promo_video_widget_area extends WP_Widget {
         <div class="page-header text-center">
           <?php if(!empty( $title )) { ?>
               <h2><?php echo esc_html($title); ?></h2>
-          <?php } do_action( 'metrostore_title_design' );
+          <?php } ?>
+          <?php 
+            do_action( 'metrostore_title_design' );
             if(!empty( $short_desc )) {
           ?>
             <p class="lead text-gray"><?php echo esc_html($short_desc); ?></p>
@@ -74,7 +75,6 @@ class metrostore_promo_video_widget_area extends WP_Widget {
         </div>
       </div>
     </div><!-- End page header-->
-
     <div class="wrap_video">
         <div class="effect_video">                    
           <?php if($video_url){ ?>
@@ -83,9 +83,7 @@ class metrostore_promo_video_widget_area extends WP_Widget {
           <?php } ?>
         </div>
     </div>
-
-</section>       
-
+</section>
   <?php         
       echo $after_widget;
   }

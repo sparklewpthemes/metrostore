@@ -281,40 +281,36 @@ function metrostore_woocommerce_breadcrumbs() {
 
 /**
  * Metrostore Breadcrumbs Function Area
-**/
-
-if ( ! function_exists( 'metrostore_breadcrumb_woocommerce' ) ) {
-    
-  function metrostore_breadcrumb_woocommerce() {
-    $breadcrumb_options = get_theme_mod('breadcrumb_options', 1);
-    $breadcrumb_archive_image = get_theme_mod('breadcrumb_archive_image');
-    if($breadcrumb_archive_image){
-        $bread_archive = $breadcrumb_archive_image;
-    }else{
-      $breadcrumb_archive_image = get_template_directory_uri().'/assets/images/about.jpg';
-    }
-
-    if($breadcrumb_options == '1') {
-?>
-        <div class="page_header_wrap" style="background:url('<?php echo esc_url($breadcrumb_archive_image); ?>') no-repeat center; background-size: cover; background-attachment:fixed;">
-            <div class="container">
-                <?php if( is_search() ) { ?>                    
-                    <header class="entry-header">
-                        <h1 class="entry-title"><?php printf( esc_html__( 'Search Results for: %s', 'metrostore' ), '<span style="background:#ff3366">' . get_search_query() . '</span>' ); ?><h1>
-                    </header><!-- .page-header -->
-                <?php }elseif( is_404() ) { ?>                    
-                    <header class="entry-header">
-                        <h1 class="entry-title"><?php esc_html_e('404','metrostore'); ?><h1>
-                    </header><!-- .page-header -->
-                <?php }else{ ?>
-                    <header class="entry-header">                   
-                        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-                    </header><!-- .entry-header -->
-                <?php } ?>
-                <?php if( metrostore_is_woocommerce_activated() ){ woocommerce_breadcrumb(); } ?>
+*/
+if ( ! function_exists( 'metrostore_breadcrumb_woocommerce' ) ) {    
+    function metrostore_breadcrumb_woocommerce() {
+        $breadcrumb_options = get_theme_mod('metrostore_breadcrumb_options', 1);
+        $breadcrumb_bg_image = get_theme_mod('metrostore_breadcrumbs_bg_image');
+        if($breadcrumb_bg_image){
+            $breadcrumb_bg_image = $breadcrumb_bg_image;
+        }else{
+          $breadcrumb_bg_image = get_template_directory_uri().'/assets/images/about.jpg';
+        }
+        if($breadcrumb_options == '1') { ?>
+            <div class="page_header_wrap" style="background:url('<?php echo esc_url($breadcrumb_bg_image); ?>') no-repeat center; background-size: cover; background-attachment:fixed;">
+                <div class="container">
+                    <?php if( is_search() ) { ?>                    
+                        <header class="entry-header">
+                            <h1 class="entry-title"><?php printf( esc_html__( 'Search Results for: %s', 'metrostore' ), '<span style="background:#ff3366">' . get_search_query() . '</span>' ); ?><h1>
+                        </header><!-- .page-header -->
+                    <?php }elseif( is_404() ) { ?>                    
+                        <header class="entry-header">
+                            <h1 class="entry-title"><?php esc_html_e('404','metrostore'); ?><h1>
+                        </header><!-- .page-header -->
+                    <?php }else{ ?>
+                        <header class="entry-header">                   
+                            <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+                        </header><!-- .entry-header -->
+                    <?php } ?>
+                    <?php if( metrostore_is_woocommerce_activated() ){ woocommerce_breadcrumb(); } ?>
+                </div>
             </div>
-        </div>
-<?php }
+        <?php }
     }
 }
 add_action( 'breadcrumb-woocommerce', 'metrostore_breadcrumb_woocommerce' );
@@ -336,11 +332,10 @@ if ( ! function_exists( 'metrostore_comment' ) ) {
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
         <div class="comment-wrapper media" id="comment-<?php comment_ID(); ?>">
             <a href="javascript();" class="pull-left">
-              <?php echo get_avatar($comment, $size='100'); ?>
+              <?php echo get_avatar($comment, $size ='100'); ?>
             </a>
             <?php if ($comment->comment_approved == '0') : ?>
-                 <em><?php esc_html_e('Your comment is awaiting moderation.','metrostore') ?></em>
-                
+                 <em><?php esc_html_e('Your comment is awaiting moderation.','metrostore') ?></em>                
             <?php endif; ?>
             <div class="media-body">
                 <div>
@@ -365,8 +360,7 @@ if ( ! function_exists( 'metrostore_comment' ) ) {
 
 /**
  * Page and Post Display Layout Metabox function
- */
- 
+*/ 
 add_action('add_meta_boxes', 'metrostore_metabox_section');
 if ( ! function_exists( 'metrostore_metabox_section' ) ) {  
     function metrostore_metabox_section(){   
@@ -438,7 +432,7 @@ if ( ! function_exists( 'metrostore_display_layout_callback' ) ) {
 if ( ! function_exists( 'metrostore_save_page_settings' ) ) {
     function metrostore_save_page_settings( $post_id ) { 
         global $metrostore_page_layouts, $post; 
-        if ( !isset( $_POST[ 'metrostore_settings_nonce' ] ) || !wp_verify_nonce( $_POST[ 'metrostore_settings_nonce' ], basename( __FILE__ ) ) )
+        if ( !isset( $_POST[ 'metrostore_settings_nonce' ] ) || !wp_verify_nonce( wp_unslash( $_POST[ 'metrostore_settings_nonce' ] ), basename( __FILE__ ) ) )
             return;
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE)  
             return;        

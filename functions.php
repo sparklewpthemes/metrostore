@@ -286,7 +286,6 @@ if ( ! function_exists( 'metrostore_admin_scripts' ) ) {
 
     	if( 'widgets.php' != $hook )
         return;
-
         if (function_exists('wp_enqueue_media'))
           wp_enqueue_media();
           wp_enqueue_script('metrostore-media-uploader', get_template_directory_uri() . '/assets/js/metrostore-admin.js', array( 'jquery', 'customize-controls' ) );

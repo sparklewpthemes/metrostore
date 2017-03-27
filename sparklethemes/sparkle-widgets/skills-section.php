@@ -104,27 +104,27 @@ class metrostore_skills_section_widget_area extends WP_Widget {
       /**
        * wp query for first block
       */  
-      $title      = $instance['metrostore_skills_section_title']; 
-      $short_desc = $instance['metrostore_skills_section_short_desc'];
+      $title      = empty( $instance['metrostore_skills_section_title'] ) ? '' : $instance['metrostore_skills_section_title']; 
+      $short_desc = empty( $instance['metrostore_skills_section_short_desc'] ) ? '' : $instance['metrostore_skills_section_short_desc'];
       
       // Our Skills Area
-      $skills_one = array ( 'icon'  => $instance['metrostore_skills_area_one_icon'], 
-                            'title' => $instance['metrostore_skills_area_one_title'], 
+      $skills_one = array ( 'icon'  => empty( $instance['metrostore_skills_area_one_icon'] ) ? '' : $instance['metrostore_skills_area_one_icon'], 
+                            'title' => empty( $instance['metrostore_skills_area_one_title'] ) ? '' : $instance['metrostore_skills_area_one_title'], 
                             'color' => '#ff3366' 
       );
    
-      $skills_two = array ( 'icon'  => $instance['metrostore_skills_area_two_icon'], 
-                            'title' => $instance['metrostore_skills_area_two_title'], 
+      $skills_two = array ( 'icon'  => empty( $instance['metrostore_skills_area_two_icon'] ) ? '' : $instance['metrostore_skills_area_two_icon'], 
+                            'title' => empty( $instance['metrostore_skills_area_two_title'] ) ? '' : $instance['metrostore_skills_area_two_title'], 
                             'color' => '#27ae61' 
       );
 
-      $skills_three = array ( 'icon'  => $instance['metrostore_skills_area_three_icon'], 
-                              'title' => $instance['metrostore_skills_area_three_title'], 
+      $skills_three = array ( 'icon'  => empty( $instance['metrostore_skills_area_three_icon'] ) ? '' : $instance['metrostore_skills_area_three_icon'], 
+                              'title' => empty( $instance['metrostore_skills_area_three_title'] ) ? '' : $instance['metrostore_skills_area_three_title'], 
                               'color' => '#fed136' 
       );
 
-      $skills_four = array ( 'icon'  => $instance['metrostore_skills_area_four_icon'], 
-                             'title' => $instance['metrostore_skills_area_four_title'], 
+      $skills_four = array ( 'icon'  => empty( $instance['metrostore_skills_area_four_icon'] ) ? '' : $instance['metrostore_skills_area_four_icon'], 
+                             'title' => empty( $instance['metrostore_skills_area_four_title'] ) ? '' : $instance['metrostore_skills_area_four_title'], 
                              'color' => '#337ab7' 
       );
 
@@ -132,33 +132,35 @@ class metrostore_skills_section_widget_area extends WP_Widget {
   ?>
   
 <section id="counter-up-chart">
-    <div class="container">
-      <div class="row"> 
-        <div class="page-header-wrapper">
-          <div class="container">
-            <div class="page-header text-center">
-              <?php if(!empty( $title )) { ?>
-                  <h2><?php echo esc_html($title); ?></h2>
-              <?php } do_action( 'metrostore_title_design' );
-                  if(!empty( $short_desc )) {
-              ?>
-                <p class="lead text-gray"><?php echo esc_html($short_desc); ?></p>
-              <?php } ?>
-            </div>
+  <div class="container">
+    <div class="row"> 
+      <div class="page-header-wrapper">
+        <div class="container">
+          <div class="page-header text-center">
+            <?php if(!empty( $title )) { ?>
+                <h2><?php echo esc_html($title); ?></h2>
+            <?php } ?>
+            <?php
+              do_action( 'metrostore_title_design' );
+                if(!empty( $short_desc )) {
+            ?>
+              <p class="lead text-gray"><?php echo esc_html($short_desc); ?></p>
+            <?php } ?>
           </div>
-        </div><!-- End page header-->
-          <?php 
-            // Skills Area One
-            metrostore_skills_percentage( $skills_one );
-            // Skills Area Two
-            metrostore_skills_percentage( $skills_two );
-            // Skills Area Three
-            metrostore_skills_percentage( $skills_three );
-            // Skills Area Four
-            metrostore_skills_percentage( $skills_four ); 
-          ?>
-      </div>
+        </div>
+      </div><!-- End page header-->
+        <?php 
+          // Skills Area One
+          metrostore_skills_percentage( $skills_one );
+          // Skills Area Two
+          metrostore_skills_percentage( $skills_two );
+          // Skills Area Three
+          metrostore_skills_percentage( $skills_three );
+          // Skills Area Four
+          metrostore_skills_percentage( $skills_four ); 
+        ?>
     </div>
+  </div>
 </section>
 
   <?php         

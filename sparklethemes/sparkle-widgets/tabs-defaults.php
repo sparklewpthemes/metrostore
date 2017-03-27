@@ -140,30 +140,22 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
       /**
        * wp query for first block
       */  
-      $latest_product       = $instance['metrostore_latest_product'];
-      $latest_product_title = $instance['metrostore_latest_product_title'];
-
-      $feature_product       = $instance['metrostore_feature_product'];
-      $feature_product_title = $instance['metrostore_feature_product_title'];
-
-      $onsale_product       = $instance['metrostore_onsale_product'];
-      $onsale_product_title = $instance['metrostore_onsalse_product_title'];
-
-      $upsale_product       = $instance['metrostore_upsale_product'];
-      $upsale_product_title = $instance['metrostore_upsalse_product_title'];
-
-      $product_number       = intval( $instance['metrostore_deault_tabs_product_number'] );
-
-
+      $latest_product        = empty( $instance['metrostore_latest_product'] ) ? '' : $instance['metrostore_latest_product'];
+      $latest_product_title  = empty( $instance['metrostore_latest_product_title'] ) ? '' : $instance['metrostore_latest_product_title'];
+      $feature_product       = empty( $instance['metrostore_feature_product'] ) ? '' : $instance['metrostore_feature_product'];
+      $feature_product_title = empty( $instance['metrostore_feature_product_title'] ) ? '' : $instance['metrostore_feature_product_title'];
+      $onsale_product        = empty( $instance['metrostore_onsale_product'] ) ? '' : $instance['metrostore_onsale_product'];
+      $onsale_product_title  = empty( $instance['metrostore_onsalse_product_title'] ) ? '' : $instance['metrostore_onsalse_product_title'];
+      $upsale_product        = empty( $instance['metrostore_upsale_product'] ) ? '' : $instance['metrostore_upsale_product'];
+      $upsale_product_title  = empty( $instance['metrostore_upsalse_product_title'] ) ? '' :$instance['metrostore_upsalse_product_title'];
+      $product_number        = empty( $instance['metrostore_deault_tabs_product_number'] ) ? 5 : $instance['metrostore_deault_tabs_product_number'];
       echo $before_widget; 
   ?>
 <?php if($latest_product == 1 || $feature_product == 1 || $onsale_product == 1 || $upsale_product == 1) { ?>
 <div class="main-container col1-layout">
     <div class="container">
       <div class="row"> 
-        <!-- Home Tabs  -->
-        <div class="home-tab col-xs-12 wow fadeInUp">
-          
+        <div class="home-tab col-xs-12 wow fadeInUp">          
           <ul class="nav home-nav-tabs home-product-tabs">
             <?php if(!empty( $latest_product ) && $latest_product == 1) { ?>
               <li class="active">
@@ -190,8 +182,7 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
                   </a> 
                 </li>
             <?php } ?>
-          </ul>
-          
+          </ul>          
           <div id="productTabContent" class="tab-content">
             <?php if(!empty( $latest_product ) && $latest_product == 1) { ?>
             <div class="tab-pane active in" id="new-arrivals">
@@ -205,12 +196,10 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
                               'post_type' => 'product',                             
                               'posts_per_page' => $product_number
                           );
-
                           $query = new WP_Query($product_args);
                           if($query->have_posts()) { while($query->have_posts()) { $query->the_post();
                       ?>
-                          <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-                          
+                          <?php woocommerce_get_template_part( 'content', 'product' ); ?>                          
                       <?php } } wp_reset_postdata(); ?>                      
                     </div>
                   </div>
@@ -222,8 +211,7 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
               <div class="best-sale-pro">
                 <div class="slider-items-products">
                   <div id="best-sale-slider" class="product-flexslider hidden-buttons">
-                    <div class="slider-items slider-width-col4 fadeInUp">
-                      
+                    <div class="slider-items slider-width-col4 fadeInUp">                      
                       <?php
                           $metrostore_label = esc_html__('New', 'metrostore');
                           $feature_product = array(
@@ -232,14 +220,11 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
                              'meta_value'       => 'yes',  
                              'posts_per_page'   => $product_number 
                           );
-
                           $query = new WP_Query($feature_product);
                           if($query->have_posts()) { while($query->have_posts()) { $query->the_post();
                       ?>
-                          <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-                          
-                      <?php } } wp_reset_postdata(); ?> 
-                      
+                          <?php woocommerce_get_template_part( 'content', 'product' ); ?>                          
+                      <?php } } wp_reset_postdata(); ?>                      
                     </div>
                   </div>
                 </div>
@@ -276,8 +261,7 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
                             $query = new WP_Query($on_sale);
                             if($query->have_posts()) { while($query->have_posts()) { $query->the_post();
                         ?>
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-                            
+                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>                            
                         <?php } } wp_reset_postdata(); ?> 
                     </div>
                   </div>
@@ -289,8 +273,7 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
               <div class="top-sellers-pro">
                 <div class="slider-items-products">
                   <div id="top-sellers-slider" class="product-flexslider hidden-buttons">
-                    <div class="slider-items slider-width-col4 fadeInUp">
-                      
+                    <div class="slider-items slider-width-col4 fadeInUp">                      
                        <?php
                             $metrostore_label = esc_html__('New', 'metrostore');
                             $upsell_product = array(
@@ -302,10 +285,8 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
                             $query = new WP_Query($upsell_product);
                             if($query->have_posts()) { while($query->have_posts()) { $query->the_post();
                         ?>
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-                            
+                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>                            
                         <?php } } wp_reset_postdata(); ?> 
-
                     </div>
                   </div>
                 </div>
@@ -317,11 +298,9 @@ class metrostore_tabs_default_widget_area extends WP_Widget {
       </div>
     </div>
 </div><!-- end main container -->
-<?php } ?>
-  <?php         
+<?php }       
       echo $after_widget;
-  }
- 
+  } 
   public function update($new_instance, $old_instance) {
       $instance = $old_instance;
       $widget_fields = $this->widget_fields();
