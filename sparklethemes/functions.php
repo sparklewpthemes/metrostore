@@ -3,50 +3,52 @@
  * Main banner slider
 */
 if ( ! function_exists( 'metrostore_slider_section' ) ) {
-    function metrostore_slider_section() { ?>
-        <div id="slider" class="ms-slider">
-            <div class="flexslider">
-                <ul class="slides">
-                    <?php
-                        $slider_cat_id = intval( get_theme_mod( 'metrostore_slider_team_id', 204));
-                        if( !empty( $slider_cat_id ) ) {
-                        $slider_args = array(
-                            'post_type' => 'post',
-                            'tax_query' => array(
-                                array(
-                                    'taxonomy'  => 'category',
-                                    'field'     => 'id', 
-                                    'terms'     => $slider_cat_id                                                                 
-                                )),
-                            'posts_per_page' => 8
-                        );
+    function metrostore_slider_section() { 
+            $slider_cat_id = intval( get_theme_mod( 'metrostore_slider_team_id' ));
+            if( !empty( $slider_cat_id ) ) {
+        ?>
+            <div id="slider" class="ms-slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <?php                        
+                            $slider_args = array(
+                                'post_type' => 'post',
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy'  => 'category',
+                                        'field'     => 'id', 
+                                        'terms'     => $slider_cat_id                                                                 
+                                    )),
+                                'posts_per_page' => 8
+                            );
 
-                        $slider_query = new WP_Query( $slider_args );
-                        if( $slider_query->have_posts() ) { while( $slider_query->have_posts() ) { $slider_query->the_post();
-                        $image_path = wp_get_attachment_image_src( get_post_thumbnail_id(), 'metrostore-banner-image', true );                           
-                    ?>                  
-                        <li><!-- Slider  list item-->
-                            <img alt="<?php the_title(); ?>" src="<?php echo esc_url( $image_path[0] ); ?>" />
-                            <div class="flex-caption">
-                                <div class="container">
-                                    <div class="caption-adjust">
-                                        <h1><?php the_title(); ?></h1>
-                                        <p><?php the_content(); ?></p>                                      
+                            $slider_query = new WP_Query( $slider_args );
+                            if( $slider_query->have_posts() ) { while( $slider_query->have_posts() ) { $slider_query->the_post();
+                            $image_path = wp_get_attachment_image_src( get_post_thumbnail_id(), 'metrostore-banner-image', true );                           
+                        ?>                  
+                            <li><!-- Slider  list item-->
+                                <img alt="<?php the_title(); ?>" src="<?php echo esc_url( $image_path[0] ); ?>" />
+                                <div class="flex-caption">
+                                    <div class="container">
+                                        <div class="caption-adjust">
+                                            <h1><?php the_title(); ?></h1>
+                                            <p><?php the_content(); ?></p>                                      
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    <?php } } wp_reset_postdata();  } ?>
-                </ul>
-            </div>
-            <div class="arrow-pagin">
-                <div class="container">
-                    <a href="#" class="prev-slide"></a>
-                    <a href="#" class="next-slide"></a>
+                            </li>
+                        <?php } wp_reset_postdata();  } ?>
+                    </ul>
                 </div>
-            </div>
-        </div><!-- End Slider -->
-     <?php 
+                <div class="arrow-pagin">
+                    <div class="container">
+                        <a href="#" class="prev-slide"></a>
+                        <a href="#" class="next-slide"></a>
+                    </div>
+                </div>
+            </div><!-- End Slider -->
+        <?php
+            } 
     }
 }
 add_action('metrostore_slider','metrostore_slider_section');

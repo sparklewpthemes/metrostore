@@ -111,7 +111,7 @@ add_action( 'after_setup_theme', 'metrostore_content_width', 0 );
 function metrostore_widgets_init() {
 	
 	register_sidebar( array(
-		'name'          => esc_html__( 'Left Sidebar Widget Area', 'metrostore' ),
+		'name'          => esc_html__( 'Right Sidebar Widget Area', 'metrostore' ),
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'metrostore' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
@@ -121,7 +121,7 @@ function metrostore_widgets_init() {
 	));
 
 	register_sidebar( array(
-		'name'          => esc_html__( 'Right Sidebar Widget Area', 'metrostore' ),
+		'name'          => esc_html__( 'Left Sidebar Widget Area', 'metrostore' ),
 		'id'            => 'sidebar-2',
 		'description'   => esc_html__( 'Add widgets here.', 'metrostore' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',

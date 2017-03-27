@@ -2,7 +2,7 @@
 
 if ( ! function_exists( 'metrostore_mobile_menu' ) ) {
 	function metrostore_mobile_menu() { 
-		 wp_nav_menu( array( 'theme_location' => 'primary', 'container_id' => 'mobile-menu' ) ); 
+		 wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'mobile-menu' ) ); 
 	}
 }
 add_action( 'metrostore-mobile-menu', 'metrostore_mobile_menu', 5 );

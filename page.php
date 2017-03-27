@@ -12,7 +12,19 @@
  * @package MetroStore
  */
 
-get_header(); ?>
+get_header(); 
+
+	$metrostore_page_layout = esc_attr( get_post_meta($post->ID, 'metrostore_page_layouts', true) );
+	if(!$metrostore_page_layout){
+		$metrostore_page_layout = 'rightsidebar';
+	}
+	if(!empty($metrostore_page_layout) && $metrostore_page_layout == 'rightsidebar' || $metrostore_page_layout == 'leftsidebar' ) {
+		$metrostore_col = 9;
+	}else if(!empty($metrostore_page_layout) && $metrostore_page_layout == 'nosidebar' ){
+		$metrostore_col = 12;
+	}
+
+?>
 
 <?php do_action( 'breadcrumb-woocommerce' ); ?>
 
@@ -20,7 +32,11 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 
-			<div id="primary" class="content-area col-xs-12 col-sm-9">
+			<?php  if ($metrostore_page_layout == 'leftsidebar') : ?>
+					<?php get_sidebar('left'); ?>
+			<?php endif; ?>
+
+			<div id="primary" class="content-area col-xs-12 col-sm-<?php echo intval( $metrostore_col ); ?>">
 				<main id="main" class="site-main" role="main">
 
 					<?php
@@ -39,7 +55,9 @@ get_header(); ?>
 				</main><!-- #main -->
 			</div><!-- #primary -->
 
-			<?php get_sidebar(); ?>
+			<?php  if ($metrostore_page_layout == 'rightsidebar') : ?>
+					<?php get_sidebar(); ?>
+			<?php endif; ?>
 			
 		</div>
 	</div>

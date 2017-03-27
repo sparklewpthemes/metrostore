@@ -74,12 +74,18 @@ Metrostore includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
-= 1.0.2 04th Dec 1016 =
+= 1.0.3 01th Jan 2017 =
+
+** Reviewer design issue like ( Header main menu, gallery page link, comment button ).
+** Remove the content-single.php comment code.
+
+
+= 1.0.2 04th Dec 2016 =
 
 ** Add the WebLayout options.
 ** Add the main banner slider options in customizer & manage in slider.
 
-= 1.0.1 14th Nov 1016 =
+= 1.0.1 14th Nov 2016 =
 
 ** Fixed the translations issue.
 ** Fixed the escaping issue.
