@@ -44,6 +44,7 @@ function metrostore_setup() {
 
 	add_image_size('metrostore-cat-image', 270, 355, true);
 	add_image_size('metrostore-blog-image', 375, 265, true);
+	add_image_size('metrostore-banner-image', 1350, 520, true);
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
@@ -53,10 +54,15 @@ function metrostore_setup() {
 	// Support WooCommerce WordPress Plugins
 	add_theme_support( 'woocommerce' );
 
+	/**
+	 * Editor style.
+	*/
+	add_editor_style( 'assets/css/editor-style.css' );
+
 	/*
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
-	 */
+	*/
 	add_theme_support( 'html5', array(
 		'search-form',
 		'comment-form',
@@ -198,29 +204,35 @@ if ( ! function_exists( 'metrostore_scripts' ) ) {
 
 		/* Metro Store Google Font */
 	    //wp_enqueue_style( 'metrostore-googleapis', '//fonts.googleapis.com/css?family=Lato:400,700,300');
+    	$buzzstore_font_args = array(
+            'family' => 'Karla:400,400italic,700,700italic|Dancing+Script:400,700|Source+Sans+Pro:200,200italic,300,300italic,400,400italic,600,600italic,700,700italic,900,900italic|Source+Code+Pro:400,500,600,700,300|Montserrat:400,500,600,700,800',
+        );
+        wp_enqueue_style('metrostore-google-fonts', add_query_arg( $buzzstore_font_args, "//fonts.googleapis.com/css" ) );
 
 	    /* Metro Store Bootstrap */
-	    wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/library/bootstrap/css/bootstrap.min.css', array(), esc_attr( $theme_version ) );
+	    wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/library/bootstrap/css/bootstrap.min.css', esc_attr( $theme_version ) );
 
 	    /* Metro Store Font Awesome */
-	    wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/assets/library/font-awesome/css/font-awesome.min.css', array(), esc_attr( $theme_version ) );
+	    wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/assets/library/font-awesome/css/font-awesome.min.css', esc_attr( $theme_version ) );
 
-	    /* Metro Store Simple Line Icons */
-	    wp_enqueue_style( 'simple-line-icons', get_template_directory_uri() . '/assets/library/simple-line-icons/css/simple-line-icons.css', array(), esc_attr( $theme_version ) );	    
+	    /*Metro Store Flexslider CSS*/
+	    wp_enqueue_style('jquery-flexslider', get_template_directory_uri() . '/assets/library/flexslider/css/flexslider.css', esc_attr( $theme_version ));
 
 	    /* Metro Store Owl Carousel CSS */
-	    wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/assets/library/carouselowl/css/owl.carousel.css', array() );
+	    wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/assets/library/carouselowl/css/owl.carousel.css' );
 
-	    wp_enqueue_style( 'owl-theme', get_template_directory_uri() . '/assets/library/carouselowl/css/owl.theme.css', array() );
+	    wp_enqueue_style( 'owl-theme', get_template_directory_uri() . '/assets/library/carouselowl/css/owl.theme.css' );
 
 	    /* Metro Store Main Style */
 	    wp_enqueue_style( 'metrostore-style', get_stylesheet_uri() );
 
+	   if ( has_header_image() ) {
+	   	$custom_css = '.site-header{ background-image: url("' . esc_url( get_header_image() ) . '"); background-repeat: no-repeat; background-position: center center; background-size: cover; }';
+	   	wp_add_inline_style( 'metrostore-style', $custom_css );
+	   }
 	   
 	   /* Metro Store Jquery Section Start */
-
 	    wp_enqueue_script( 'metrostore-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), esc_attr( $theme_version ), true );
-
 	    wp_enqueue_script( 'metrostore-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), esc_attr( $theme_version ), true );
 
 	    /* Metro Store html5 */
@@ -230,6 +242,9 @@ if ( ! function_exists( 'metrostore_scripts' ) ) {
 	    /* Metro Store Respond */
 	    wp_enqueue_script('respond', get_template_directory_uri() . '/assets/library/respond/respond.min.js', array('jquery'), esc_attr( $theme_version ), false);
 	    wp_script_add_data( 'respond', 'conditional', 'lt IE 9' );
+
+	    /*Metore Store Flexslider*/
+ 		wp_enqueue_script('jquery-flexslider', get_template_directory_uri() . '/assets/library/flexslider/js/jquery.flexslider-min.js', array('jquery'), esc_attr( $theme_version ), true);
 
 	    /* Metore Store Bootstrap */
 	    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/library/bootstrap/js/bootstrap.min.js', array('jquery'), esc_attr( $theme_version ), false);

@@ -54,21 +54,53 @@ if ( ! function_exists( 'metrostore_top_header' ) ) {
 			  <div class="container">
 			    <div class="row">
 			      
-				    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-6 language-currency-wrapper">
-				        <?php
-				            if (is_user_logged_in()) {
-				            global $current_user;
-				        ?>
-				            <div class="welcome-msg hidden-xs">
-				                <?php esc_html_e('Default welcome', 'metrostore'); ?>
-				                <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>">
-			                        <?php echo esc_attr($current_user->display_name); ?>	
-				                </a>
-				            </div>
-				        <?php } ?><!-- End Default Welcome Message --> 
+				    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+        				<ul class="quickinfo">
+        					<?php
+        						$email_address    = sanitize_email( get_theme_mod('metrostore_email_title') );
+        						$phone_number     = esc_attr( get_theme_mod('metrostore_phone_number') );
+        						$phonenumber      = preg_replace("/[^0-9]/","",$phone_number);
+        						$map_address      = esc_html( get_theme_mod('metrostore_map_address') );
+        						$shop_open_time   = esc_attr( get_theme_mod('metrostore_start_open_time') );
+        					
+        					if(!empty( $email_address )) { ?>        							
+        	                    <li>
+        	                    	<a href="mailto:<?php echo sanitize_email( $email_address ); ?>">
+        	                    		<i class="fa fa-envelope"></i>
+        	                    		<?php echo sanitize_email( $email_address ); ?>
+        	                    	</a>
+        	                    </li>
+                            <?php }  ?>
+                            
+                            <?php if(!empty( $phone_number )) { ?>        							
+        	                    <li>
+        	                    	<i class="fa fa-phone"></i>
+        	                    	<a href="tel:<?php echo esc_attr( $phonenumber ); ?>">
+        	                    		<?php echo esc_attr( $phone_number ); ?>
+        	                    	</a>
+        	                    </li>
+                            <?php }  ?>
+                            
+                            <?php if(!empty( $map_address )) { ?>        							
+        	                    <li>
+        	                    	<a target="_blank" href="https://www.google.com.np/maps/place/<?php echo esc_attr( $map_address ); ?>">
+        	                    		<i class="fa fa-map"></i>
+        	                    		<?php echo esc_attr( $map_address ); ?>
+        	                    	</a>
+        	                    </li>
+                            <?php }  ?>
+                            
+                            <?php if(!empty( $shop_open_time )) { ?>        							
+        	                    <li>
+        	                    	<i class="fa fa-clock-o"></i>
+        	                    	<?php echo esc_attr( $shop_open_time ); ?>
+        	                    </li>
+                            <?php }  ?>        	                    
+        				</ul>
+				        
 				    </div>
 
-				    <div class="headerlinkmenu col-lg-8 col-md-7 col-sm-7 col-xs-6">
+				    <div class="headerlinkmenu col-lg-5 col-md-5 col-sm-6 col-xs-6">
 				        <div class="links">
 				          	<?php if(function_exists( 'metrostore_wishlist' )) {  ?>
 					          	<div class="wishlist">
@@ -109,10 +141,9 @@ if ( ! function_exists( 'metrostore_top_header' ) ) {
 					          	</div>
 
 				          	<?php } ?>
-				    </div>
-			        
-			         
-			      </div>
+				    	</div>
+			      	</div>
+
 			    </div>
 			  </div>
 			</div><!-- End header-top -->
@@ -132,7 +163,7 @@ if ( ! function_exists( 'metrostore_main_header' ) ) {
 			<div class="container">
 		        <div class="row">		          
 		          <div class="col-sm-3 col-xs-12">
-		            <div class="site-branding logo">
+		            <div class="logo site-branding">
 		            	<?php
 		            		if ( function_exists( 'the_custom_logo' ) ) {
 		            			the_custom_logo();

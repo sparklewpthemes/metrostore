@@ -60,4 +60,13 @@
     </div>
 </nav><!-- end nav -->
 
+<?php
+	if( is_front_page() ){
+		$slider_options = esc_attr( get_theme_mod( 'metrostore_home_slider_options', 'enable' ) );
+		if( !empty( $slider_options ) && $slider_options == 'enable' ){
+			do_action( 'metrostore_slider' );
+		}
+	}	
+?>
+
 <div id="content" class="site-content">

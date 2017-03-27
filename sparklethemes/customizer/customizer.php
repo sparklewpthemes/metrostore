@@ -9,26 +9,106 @@
  * Add postMessage support for site title and description for the Theme Customizer.
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
- */
+*/
 function metrostore_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
-/**
- * Header Settings Area 
-**/
-	$wp_customize->add_panel('metorstore_header_settings', array(
-	  'title' => esc_html__('Header Settings Area', 'metrostore'),
-	  'capability' => 'edit_theme_options',
-	  'priority' => 5,
+	/**
+	  * Web Page Layout Section
+	*/
+	$wp_customize->add_section( 'metrostore_web_page_layout', array(
+		'title'   => esc_html__('WebLayout Options', 'metrostore'),
+		'priority' => 21,
 	));
 
-	$wp_customize->get_section('title_tagline')->panel = 'metorstore_header_settings';
+		$wp_customize->add_setting('metrostore_webpage_layout_options', array(
+		  'default' => 'fullwidth',
+		  'sanitize_callback' => 'metrostore_weblayout_sanitize',
+		  //'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('metrostore_webpage_layout_options', array(
+		  'type' => 'radio',
+		  'label' => esc_html__('Web Layout Options', 'metrostore'),
+		  'section' => 'metrostore_web_page_layout',
+		  'settings' => 'metrostore_webpage_layout_options',
+			  'choices' => array(
+			    'boxed' => esc_html__('Boxed Layout', 'metrostore'),
+			    'fullwidth' => esc_html__('Full Width Layout', 'metrostore')
+			  )
+		));
+
+/**
+ * Header Settings Area 
+*/
+$wp_customize->add_panel('metorstore_header_settings', array(
+  'title' => esc_html__('Header Settings Area', 'metrostore'),
+  'capability' => 'edit_theme_options',
+  'priority' => 21,
+));
+	
+	/**
+	 * Top Header Quick Contact Information Options 
+	*/
+	$wp_customize->add_section( 'metrostore_header_quickinfo', array(
+	  'capability'     => 'edit_theme_options',
+	  'panel'		   => 'metorstore_header_settings',
+	  'title'          => esc_html__( 'Quick Contact Info', 'metrostore' )
+	) );
+
+		$wp_customize->add_setting('metrostore_email_title', array(
+		  'default' => '',
+		  'sanitize_callback' => 'sanitize_email',  // done
+		));
+
+		$wp_customize->add_control('metrostore_email_title',array(
+		  'type' => 'text',
+		  'label' => esc_html__('Email Address', 'metrostore'),
+		  'section' => 'metrostore_header_quickinfo',
+		  'setting' => 'metrostore_email_title',
+		));
+
+		$wp_customize->add_setting('metrostore_phone_number', array(
+		  'default' => '',
+		  'sanitize_callback' => 'metrostore_text_sanitize',  // done
+		));
+
+		$wp_customize->add_control('metrostore_phone_number',array(
+		  'type' => 'text',
+		  'label' => esc_html__('Phone Number', 'metrostore'),
+		  'section' => 'metrostore_header_quickinfo',
+		  'setting' => 'metrostore_phone_number',
+		));
+
+		$wp_customize->add_setting('metrostore_map_address', array(
+		  'default' => '',
+		  'sanitize_callback' => 'metrostore_text_sanitize',  // done
+		));
+
+		$wp_customize->add_control('metrostore_map_address',array(
+		  'type' => 'text',
+		  'label' => esc_html__('Address', 'metrostore'),
+		  'section' => 'metrostore_header_quickinfo',
+		  'setting' => 'metrostore_map_address',
+		));
+
+		$wp_customize->add_setting('metrostore_start_open_time', array(
+		  'default' => '',
+		  'sanitize_callback' => 'metrostore_text_sanitize',  // done
+		));
+
+		$wp_customize->add_control('metrostore_start_open_time',array(
+		  'type' => 'text',
+		  'label' => esc_html__('Opening Time', 'metrostore'),
+		  'section' => 'metrostore_header_quickinfo',
+		  'setting' => 'metrostore_start_open_time',
+		));
 
 	/**
 	  * Services settings Options
-	**/
+	*/
     $wp_customize->add_section('metrostore_header_service_area', array(
 		'title'    => esc_html__('Header Services Area', 'metrostore'),
 		'panel'    => 'metorstore_header_settings'
@@ -116,7 +196,7 @@ function metrostore_customize_register( $wp_customize ) {
 */
 	$wp_customize->get_section( 'colors' )->title    = esc_html__( 'Theme Colors Settings', 'metrostore' );
 	
-	$wp_customize->get_section('colors' )->priority = 8;
+	$wp_customize->get_section('colors' )->priority = 22;
 
 	$wp_customize->add_setting('metrostore_primary_color', array(
      'default' => '#ff3366',
@@ -131,19 +211,53 @@ function metrostore_customize_register( $wp_customize ) {
      'setting'  => 'metrostore_primary_color',
     ));
 
+/**
+ * Banner/Slider Settings Panel
+*/
+$wp_customize->add_section('metrostore_main_banner_area', array(
+  'title' => esc_html__('Home Slider Settings', 'metrostore'),
+  'priority' => 23,
+));
+	
+	$wp_customize->add_setting('metrostore_home_slider_options', array(
+	   'default' => 'enable',
+	   'sanitize_callback' => 'metrostore_radio_enable_sanitize', // done
+	));
+
+	$wp_customize->add_control('metrostore_home_slider_options', array(
+	   'type' => 'radio',
+	   'label' => esc_html__('Enable/Disable HomePage Slider', 'metrostore'),
+	   'section' => 'metrostore_main_banner_area',
+	   'setting' => 'metrostore_home_slider_options',
+	   'choices' => array(
+	      'enable' => esc_html__('Enable', 'metrostore'),
+	      'disable' => esc_html__('Disable', 'metrostore'),
+	)));
+
+	/* Main Slider Category */
+	$wp_customize->add_setting( 'metrostore_slider_team_id', array(
+	      'default' => '',
+	      'sanitize_callback' => 'absint'
+	) );
+
+	$wp_customize->add_control( new Metrostore_Category_Dropdown( $wp_customize, 'metrostore_slider_team_id', array(
+	    'label' => esc_html__( 'Select Slide Category', 'metrostore' ),
+	    'section' => 'metrostore_main_banner_area',
+	) ) );
+
 		
 /**
  * Footer Settings Area 
-**/
+*/
 	$wp_customize->add_panel('metorstore_settings', array(
 	  'title' => esc_html__('Footer Settings Area', 'metrostore'),
 	  'capability' => 'edit_theme_options',
-	  'priority' => 10,
+	  'priority' => 24,
 	));
 
 	/**
 	  * Copyright message settings Options
-	**/
+	*/
     $wp_customize->add_section('metrostore_copyright_message', array(
 		'priority' => 1,
 		'title'    => esc_html__('Write Copyright', 'metrostore'),
@@ -166,7 +280,7 @@ function metrostore_customize_register( $wp_customize ) {
 
 	/**
 	  * Social Icon Link Options
-	**/
+	*/
     $wp_customize->add_section('metrostore_social_link_activate_settings', array(
 		'priority' => 2,
 		'title'    => esc_html__('Social Icon Options', 'metrostore'),
@@ -239,19 +353,81 @@ function metrostore_customize_register( $wp_customize ) {
 			$i++;
 		}
 
-		/**
-		  * Text Sanitization
-		*/
-	    function metrostore_text_sanitize( $input ) {
-	        return wp_kses_post( force_balance_tags( $input ) );
-	    }
+	/**
+	 * Text Sanitization
+	*/
+    function metrostore_text_sanitize( $input ) {
+        return wp_kses_post( force_balance_tags( $input ) );
+    }
+
+    /**
+	 * Web Layout Sanitization
+	*/
+    function metrostore_weblayout_sanitize($input) {
+        $valid_keys = array(
+           'boxed' => esc_html__('Boxed Layout', 'metrostore'),
+		   'fullwidth' => esc_html__('Full Width Layout', 'metrostore')
+        );
+        if ( array_key_exists( $input, $valid_keys ) ) {
+          return $input;
+        } else {
+          return '';
+        }
+    }
+
+    /**
+	 * Enable/Disable Sanitization
+	*/
+    function metrostore_radio_enable_sanitize($input) {
+        $valid_keys = array(
+           'enable' => esc_html__('Enable', 'metrostore'),
+	       'disable' => esc_html__('Disable', 'metrostore'),
+        );
+        if ( array_key_exists( $input, $valid_keys ) ) {
+          return $input;
+        } else {
+          return '';
+        }
+    }
+    	
 }
 add_action( 'customize_register', 'metrostore_customize_register' );
+
+/**
+ * Custom Control for Customizer Category Dropdown
+*/
+if( class_exists( 'WP_Customize_control') ) {
+    class Metrostore_Category_Dropdown extends WP_Customize_Control{
+        private $cats = false;
+        public function __construct($manager, $id, $args = array(), $options = array()){
+            $this->cats = get_categories($options);
+            parent::__construct( $manager, $id, $args );
+        }
+
+        public function render_content(){
+            if(!empty($this->cats)){
+                ?>
+                    <label>
+                      <span class="customize-category-select-control"><?php echo esc_html( $this->label ); ?></span>
+                      <select <?php $this->link(); ?>>
+                           <?php
+                                foreach ( $this->cats as $cat )
+                                {
+                                    printf('<option value="%s" %s>%s</option>', $cat->term_id, selected($this->value(), $cat->term_id, false), $cat->name);
+                                }
+                           ?>
+                      </select>
+                    </label>
+                <?php
+            }
+       }
+    }
+}
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function metrostore_customize_preview_js() {
-	wp_enqueue_script( 'metrostore_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20151215', true );
+	wp_enqueue_script( 'metrostore_customizer', get_template_directory_uri() . '/assets/js/customizer.js', array( 'customize-preview' ), '20151215', true );
 }
 add_action( 'customize_preview_init', 'metrostore_customize_preview_js' );

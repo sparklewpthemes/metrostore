@@ -23,6 +23,18 @@ jQuery(document).ready(function($) {
     });
 
     /**
+     * Main Banner Flexslider
+    */
+    try {
+        var msSlider = $('.flexslider');
+        msSlider.flexslider({
+            animation: "fade"
+        });
+    } catch(err) {
+
+    }
+
+    /**
      * ScrollUp
     */
     jQuery(window).scroll(function() {

@@ -24,6 +24,11 @@ if( !function_exists('metrostore_file_directory') ){
  */
 require metrostore_file_directory('sparklethemes/functions.php');
 
+/**
+ * Implement the Custom Header feature.
+*/
+require metrostore_file_directory('sparklethemes/core/custom-header.php');
+
 
 /**
  * Custom template tags for this theme.

@@ -40,7 +40,7 @@ The exceptions to license are as follows:
 
 * The Font Awesome font is licensed under the SIL OFL 1.1: http://scripts.sil.org/OFL
 
-* simple-line-icons https://github.com/thesabbir/simple-line-icons [MIT](http://opensource.org/licenses/MIT) Copyright (c) 2016 Sabbir Ahmed & All Contributors
+* FlexSlider https://github.com/woothemes/FlexSlider [GPLv2](https://www.gnu.org/licenses/gpl-2.0.html) - Copyright 2012 WooThemes Tyler Smith (@mbmufffin)
 
 * html5shiv https://github.com/afarkas/html5shiv [MIT](http://opensource.org/licenses/MIT) by @afarkas @jdalton @jon_neal @rem
 
@@ -73,6 +73,11 @@ https://pixabay.com/en/woman-beach-female-jeans-blue-1031306/  License CC0 Publi
 Metrostore includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
+
+= 1.0.2 04th Dec 1016 =
+
+** Add the WebLayout options.
+** Add the main banner slider options in customizer & manage in slider.
 
 = 1.0.1 14th Nov 1016 =
 

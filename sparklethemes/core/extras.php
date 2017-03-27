@@ -24,6 +24,12 @@ function metrostore_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
+	//Web Layout
+	if( get_theme_mod( 'metrostore_webpage_layout_options', 'fullwidth' ) == 'boxed') {
+		$classes[] = 'boxed';
+	}
+
+
 	$classes[] = 'woocommerce';
 
 	return $classes;

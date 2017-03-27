@@ -1,4 +1,59 @@
 <?php
+/**
+ * Main banner slider
+*/
+if ( ! function_exists( 'metrostore_slider_section' ) ) {
+    function metrostore_slider_section() { ?>
+        <div id="slider" class="ms-slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <?php
+                        $slider_cat_id = intval( get_theme_mod( 'metrostore_slider_team_id', 204));
+                        if( !empty( $slider_cat_id ) ) {
+                        $slider_args = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy'  => 'category',
+                                    'field'     => 'id', 
+                                    'terms'     => $slider_cat_id                                                                 
+                                )),
+                            'posts_per_page' => 8
+                        );
+
+                        $slider_query = new WP_Query( $slider_args );
+                        if( $slider_query->have_posts() ) { while( $slider_query->have_posts() ) { $slider_query->the_post();
+                        $image_path = wp_get_attachment_image_src( get_post_thumbnail_id(), 'metrostore-banner-image', true );                           
+                    ?>                  
+                        <li><!-- Slider  list item-->
+                            <img alt="<?php the_title(); ?>" src="<?php echo esc_url( $image_path[0] ); ?>" />
+                            <div class="flex-caption">
+                                <div class="container">
+                                    <div class="caption-adjust">
+                                        <h1><?php the_title(); ?></h1>
+                                        <p><?php the_content(); ?></p>                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <?php } } wp_reset_postdata();  } ?>
+                </ul>
+            </div>
+            <div class="arrow-pagin">
+                <div class="container">
+                    <a href="#" class="prev-slide"></a>
+                    <a href="#" class="next-slide"></a>
+                </div>
+            </div>
+        </div><!-- End Slider -->
+     <?php 
+    }
+}
+add_action('metrostore_slider','metrostore_slider_section');
+
+/**
+ * Title
+*/
 if ( ! function_exists( 'metrostore_title_design' ) ) {
 	function metrostore_title_design() {	 ?>	
 		<div class="divider divider-icon divider-md">
@@ -85,17 +140,17 @@ if (defined( 'YITH_WCWL' )) {
                 
                 <div class="yith-wcwl-add-button show" style="display:block">
                     <a href="<?php echo esc_url( $url ); ?>" data-toggle="tooltip" data-placement="top" rel="nofollow" data-product-id="<?php echo esc_attr( $id ); ?>" data-product-type="simple" title="<?php esc_html__( 'Add to Wishlist', 'metrostore' ); ?>" class="add_to_wishlist">
-                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart-o"></i>
                     </a>                    
                     <!-- <img src="<?php echo get_template_directory_uri() . '/images/loading.gif'; ?>" class="ajax-loading" alt="loading" width="16" height="16"> -->
                 </div>                
 
                 <div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;">
-                    <a class="link-wishlist" href="<?php echo esc_url( $wishlist_url ); ?>"><?php esc_html_e( 'Added', 'metrostore' ); ?></a>
+                    <a class="link-wishlist" href="<?php echo esc_url( $wishlist_url ); ?>"><i class="fa fa-heart"></i></a>
                 </div>
 
                 <div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none">
-                    <a  class="link-wishlist" href="<?php echo esc_url( $wishlist_url ); ?>"><?php esc_html_e( 'Added', 'metrostore' ); ?></a>
+                    <a  class="link-wishlist" href="<?php echo esc_url( $wishlist_url ); ?>"><i class="fa fa-heart"></i></a>
                 </div>
 
                 <div class="clear"></div>
